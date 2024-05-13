@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Footnotes"
-msgstr "Notes de bas de page"
+msgstr "Notes de bas de page à la volée"
 
 msgid "footnotes"
 msgstr "footnotes"
