@@ -1,0 +1,12 @@
+<modules xmlns:da="http://dotaddict.org/da/">
+  <module id="footnotes">
+    <name>footnotes</name>
+    <version>1.0</version>
+    <author>Franck Paul</author>
+    <desc>Footnotes</desc>
+    <file>https://github.com/franck-paul/bigfoot/releases/download/1.0/plugin-footnotes-1.0.zip</file>
+    <da:dcmin>2.30</da:dcmin>
+    <da:details>https://open-time.net/?q=footnotes</da:details>
+    <da:support>https://github.com/franck-paul/footnotes</da:support>
+  </module>
+</modules>
