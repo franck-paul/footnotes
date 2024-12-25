@@ -25,6 +25,6 @@ $this->registerModule(
 
         'details'    => 'https://open-time.net/?q=footnotes',
         'support'    => 'https://github.com/franck-paul/footnotes',
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/footnotes/master/dcstore.xml',
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/footnotes/main/dcstore.xml',
     ]
 );
