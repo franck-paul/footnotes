@@ -27,19 +27,19 @@ dotclear.ready(() => {
 
       if (data?.background) {
         // Set a color background to clone
-        const getDefaultBackground = function () {
+        const getDefaultBackground = () => {
           // have to add to the document in order to use getComputedStyle
           const div = document.createElement('div');
           document.head.appendChild(div);
-          const bg = window.getComputedStyle(div).backgroundColor;
-          document.head.removeChild(div);
+          const bg = globalThis.getComputedStyle(div).backgroundColor;
+          div.remove();
           return bg;
         };
-        const getInheritedBackgroundColor = function (el) {
+        const getInheritedBackgroundColor = (el) => {
           // get default style for current browser
           const defaultStyle = getDefaultBackground(); // typically "rgba(0, 0, 0, 0)"
           // get computed color for el
-          const backgroundColor = window.getComputedStyle(el).backgroundColor;
+          const { backgroundColor } = globalThis.getComputedStyle(el);
           // if we got a real value, return it
           if (backgroundColor !== defaultStyle) return backgroundColor;
           // if we've reached the top parent el without getting an explicit color, return default
