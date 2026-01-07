@@ -1,2 +1,28 @@
-.footnotes {
+.notebox {
+  position: sticky;
+  bottom: 0;
+  border-block-start: 1px solid;
+  display: none;
+
+  &.present {
+    display: block;
+  }
+
+  .show_note {
+    display: block;
+    height: auto;
+  }
+  li.show_note {
+    display: list-item;
+  }
+  .hide_note {
+    /* Don't use display: none as it will change the numbering of visible items in ordered list */
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+/* Syntax specific */
+div.footnotes[role='doc-endnotes']:not(.cloned) ol:before {
+  content: none;
 }

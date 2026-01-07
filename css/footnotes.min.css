@@ -1,1 +1,1 @@
-
+.notebox{border-block-start:1px solid;display:none;position:sticky;bottom:0;&.present{display:block}& .show_note{height:auto;display:block}& li.show_note{display:list-item}& .hide_note{visibility:hidden;height:0}}div.footnotes[role=doc-endnotes]:not(.cloned) ol:before{content:none}
