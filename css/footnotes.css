@@ -1,21 +1,25 @@
-.notebox {
+.flightnotes {
   position: sticky;
   bottom: 0;
   border-block-start: 1px solid;
+  padding-block-end: 1em;
   display: none;
 
-  &.present {
+  &.flightnotes_show {
     display: block;
   }
+  &.flightnotes_hide {
+    display: none;
+  }
 
-  .show_note {
+  .flightnotes_note_show {
     display: block;
     height: auto;
   }
-  li.show_note {
+  li.flightnotes_note_show {
     display: list-item;
   }
-  .hide_note {
+  .flightnotes_note_hide {
     /* Don't use display: none as it will change the numbering of visible items in ordered list */
     visibility: hidden;
     height: 0;
@@ -23,6 +27,7 @@
 }
 
 /* Syntax specific */
+/* Remove notes title, might be set with :before in CSS */
 div.footnotes[role='doc-endnotes']:not(.cloned) ol:before {
   content: none;
 }

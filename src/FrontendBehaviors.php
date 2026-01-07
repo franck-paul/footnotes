@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\footnotes;
 
 use Dotclear\App;
+use Dotclear\Helper\Html\Html;
 
 class FrontendBehaviors
 {
@@ -39,6 +40,9 @@ class FrontendBehaviors
         }
 
         echo
+        Html::jsJson('flightnotes', [
+            'background' => $settings->background ?? true,
+        ]) .
         My::cssLoad('footnotes.css') .
         My::jsLoad('footnotes.js');
 

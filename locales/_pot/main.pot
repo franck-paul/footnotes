@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 footnotes module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-13 09:58+0200\n"
+"POT-Creation-Date: 2026-01-07 16:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,23 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/footnotes/src/Backend.php:25
-#: ../git-plugins/footnotes/src/BackendBehaviors.php:33
-msgid "Footnotes"
-msgstr ""
-
-#: ../git-plugins/footnotes/src/Backend.php:25
+#: ../git-plugins/footnotes/src/Backend.php:28
 msgid "footnotes"
 msgstr ""
 
-#: ../git-plugins/footnotes/src/BackendBehaviors.php:38
+#: ../git-plugins/footnotes/src/Backend.php:29
+#: ../git-plugins/footnotes/src/BackendBehaviors.php:34
+msgid "Footnotes"
+msgstr ""
+
+#: ../git-plugins/footnotes/src/BackendBehaviors.php:39
 msgid "Enable Footnotes"
 msgstr ""
 
-#: ../git-plugins/footnotes/src/BackendBehaviors.php:40
+#: ../git-plugins/footnotes/src/BackendBehaviors.php:41
 msgid "Options"
 msgstr ""
 
-#: ../git-plugins/footnotes/src/BackendBehaviors.php:44
+#: ../git-plugins/footnotes/src/BackendBehaviors.php:45
 msgid "Activate only in single entry context"
+msgstr ""
+
+#: ../git-plugins/footnotes/src/BackendBehaviors.php:50
+msgid "Set footnotes background"
 msgstr ""

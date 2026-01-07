@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief bigfoot, a plugin for Dotclear 2
  *
@@ -43,6 +44,11 @@ class BackendBehaviors
                 ->value(1)
                 ->label((new Label(__('Activate only in single entry context'), Label::INSIDE_TEXT_AFTER))),
             ]),
+            (new Para())->items([
+                (new Checkbox('footnotes_background', (bool) $settings->background))
+                ->value(1)
+                ->label((new Label(__('Set footnotes background'), Label::INSIDE_TEXT_AFTER))),
+            ]),
         ])
         ->render();
 
@@ -55,6 +61,7 @@ class BackendBehaviors
 
         $settings->put('enabled', !empty($_POST['footnotes_enabled']), App::blogWorkspace()::NS_BOOL);
         $settings->put('single', !empty($_POST['footnotes_single']), App::blogWorkspace()::NS_BOOL);
+        $settings->put('background', !empty($_POST['footnotes_background']), App::blogWorkspace()::NS_BOOL);
 
         return '';
     }
