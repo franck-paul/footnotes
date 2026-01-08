@@ -47,8 +47,30 @@ dotclear.ready(() => {
           // otherwise, recurse and try again on parent element
           return getInheritedBackgroundColor(el.parentElement);
         };
-        clone.style.backgroundColor = getInheritedBackgroundColor(footnotes);
+        const cloneBackground = () => {
+          clone.style.backgroundColor = getInheritedBackgroundColor(footnotes);
+        };
+        cloneBackground();
+
+        // Watch for dark/light mode modification
+        globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => cloneBackground());
+        const callbackHTML = () => {
+          // Wait some times to let browser recalc the new CSS
+          setTimeout(cloneBackground, 1000);
+        };
+        const moHTML = new MutationObserver(callbackHTML);
+        moHTML.observe(document.querySelector('html'), {
+          attributeFilter: ['style'],
+        });
       }
+
+      globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
+        if (matches) {
+          console.log('change to dark mode!');
+        } else {
+          console.log('change to light mode!');
+        }
+      });
 
       // Add clone after standard footnotes div
       clone.classList.add('flightnotes');
@@ -56,7 +78,7 @@ dotclear.ready(() => {
       footnotes.after(clone);
 
       // Add intersection observer for each of found links (see above)
-      const callback_link = (entries, _observer) => {
+      const callbackLink = (entries, _observer) => {
         for (const entry of entries) {
           const idnote = entry.target.getAttribute('href').replace(/^.*#/, '');
           let iidnote = clone.querySelector(`.flightnotes #${CSS.escape(idnote)}`);
@@ -72,22 +94,22 @@ dotclear.ready(() => {
         if (clone.querySelectorAll('.flightnotes_note_show').length > 0) clone.classList.add('flightnotes_show');
         else clone.classList.remove('flightnotes_show');
       };
-      const io_link = new IntersectionObserver(callback_link, {
+      const ioLink = new IntersectionObserver(callbackLink, {
         threshold: [1],
         trackVisibility: true,
         delay: 100, // Set a minimum delay between notifications
       });
-      for (const link of links) io_link.observe(link);
+      for (const link of links) ioLink.observe(link);
 
       // Add intersection observer for cloned footnotes (if visible no need to display on the fly)
-      const callback_notes = (entries, _observer) => {
+      const callbackNotes = (entries, _observer) => {
         for (const entry of entries) {
           if (entry.isIntersecting) clone.classList.add('flightnotes_hide');
           else clone.classList.remove('flightnotes_hide');
         }
       };
-      const io_notes = new IntersectionObserver(callback_notes);
-      io_notes.observe(footnotes);
+      const ioNotes = new IntersectionObserver(callbackNotes);
+      ioNotes.observe(footnotes);
     }
   }
 });
