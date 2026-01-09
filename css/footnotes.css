@@ -23,6 +23,7 @@
     /* Don't use display: none as it will change the numbering of visible items in ordered list */
     visibility: hidden;
     height: 0;
+    content-visibility: auto;
   }
 }
 
