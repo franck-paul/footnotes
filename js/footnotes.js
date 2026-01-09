@@ -9,8 +9,12 @@ dotclear.ready(() => {
   const returnPattern = /^#(fnref|footnote-marker|rev-wiki-footnote)[:\-_\d]/gi;
 
   // Recherche des appels de note :
+  const base =
+    document.location.hash && document.location.href.includes(document.location.hash)
+      ? document.location.href.substring(0, document.location.href.indexOf(document.location.hash))
+      : document.location.href;
   const links = Array.from(document.querySelectorAll(`${scope} a`)).filter(
-    (link) => link.href.startsWith(document.location.href) && link.hash.match(anchorPattern) && !link.hash.match(returnPattern),
+    (link) => link.href.startsWith(base) && link.hash.match(anchorPattern) && !link.hash.match(returnPattern),
   );
 
   if (links.length > 0) {
