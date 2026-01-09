@@ -8,7 +8,7 @@ dotclear.ready(() => {
   const anchorPattern = /^#(fn|footnote|wiki-footnote)[:\-_\d]/gi;
   const returnPattern = /^#(fnref|footnote-marker|rev-wiki-footnote)[:\-_\d]/gi;
 
-  // Recherche des appels de note :
+  // Look for footnotes' links:
   const base =
     document.location.hash && document.location.href.includes(document.location.hash)
       ? document.location.href.substring(0, document.location.href.indexOf(document.location.hash))
@@ -100,7 +100,7 @@ dotclear.ready(() => {
       };
       const ioLink = new IntersectionObserver(callbackLink, {
         threshold: [1],
-        rootMargin: '0px 0px -40% 0px',
+        rootMargin: '0px 0px -40% 0px', // Area for triggering: top 60% of available viewport
         trackVisibility: true,
         delay: 100, // Set a minimum delay between notifications
       });
