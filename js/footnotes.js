@@ -96,6 +96,7 @@ dotclear.ready(() => {
       };
       const ioLink = new IntersectionObserver(callbackLink, {
         threshold: [1],
+        rootMargin: '0px 0px -40% 0px',
         trackVisibility: true,
         delay: 100, // Set a minimum delay between notifications
       });
