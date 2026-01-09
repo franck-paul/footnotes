@@ -15,9 +15,9 @@ $this->registerModule(
     'footnotes',
     'Footnotes',
     'Franck Paul',
-    '3.2',
+    '3.3',
     [
-        'date'        => '2003-08-13T13:42:00+03.2',
+        'date'        => '2003-08-13T13:42:00+03.3',
         'requires'    => [['core', '2.36']],
         'permissions' => 'My',
         'type'        => 'plugin',
