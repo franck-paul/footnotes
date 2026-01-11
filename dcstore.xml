@@ -1,11 +1,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="footnotes">
     <name>footnotes</name>
-    <version>3.3</version>
+    <version>3.4</version>
     <author>Franck Paul</author>
     <desc>Footnotes</desc>
-    <date>2003-08-13T13:42:00+03.3</date>
-    <file>https://github.com/franck-paul/bigfoot/releases/download/3.3/plugin-footnotes-3.3.zip</file>
+    <date>2003-08-13T13:42:00+03.4</date>
+    <file>https://github.com/franck-paul/bigfoot/releases/download/3.4/plugin-footnotes-3.4.zip</file>
     <da:dcmin>2.36</da:dcmin>
     <da:details>https://dotclear.org/plugin/detail/footnotes</da:details>
     <da:support>https://github.com/franck-paul/footnotes</da:support>
