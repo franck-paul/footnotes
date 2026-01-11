@@ -1,0 +1,9 @@
+#footnotes {
+  table.fitcontent {
+    width: fit-content;
+  }
+
+  .secondlevel {
+    margin-inline-start: 1em;
+  }
+}

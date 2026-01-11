@@ -30,42 +30,51 @@ dotclear.ready(() => {
       }
 
       if (data?.background) {
-        // Set a color background to clone
-        const getDefaultBackground = () => {
-          // have to add to the document in order to use getComputedStyle
-          const div = document.createElement('div');
-          document.head.appendChild(div);
-          const bg = globalThis.getComputedStyle(div).backgroundColor;
-          div.remove();
-          return bg;
-        };
-        const getInheritedBackgroundColor = (el) => {
-          // get default style for current browser
-          const defaultStyle = getDefaultBackground(); // typically "rgba(0, 0, 0, 0)"
-          // get computed color for el
-          const { backgroundColor } = globalThis.getComputedStyle(el);
-          // if we got a real value, return it
-          if (backgroundColor !== defaultStyle) return backgroundColor;
-          // if we've reached the top parent el without getting an explicit color, return default
-          if (!el.parentElement) return defaultStyle;
-          // otherwise, recurse and try again on parent element
-          return getInheritedBackgroundColor(el.parentElement);
-        };
-        const cloneBackground = () => {
-          clone.style.backgroundColor = getInheritedBackgroundColor(footnotes);
-        };
-        cloneBackground();
+        // Get user-defined background color if defined
+        if (data.color !== undefined && data.color !== '') {
+          document.documentElement.style.setProperty('--flightnotes-background', data.color);
+          clone.classList.add('flightnotes_color');
+        } else {
+          // Set a color background to clone
+          const getDefaultBackground = () => {
+            // have to add to the document in order to use getComputedStyle
+            const div = document.createElement('div');
+            document.head.appendChild(div);
+            const bg = globalThis.getComputedStyle(div).backgroundColor;
+            div.remove();
+            return bg;
+          };
 
-        // Watch for dark/light mode modification
-        globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => cloneBackground());
-        const callbackHTML = () => {
-          // Wait some times to let browser recalc the new CSS
-          setTimeout(cloneBackground, 1000);
-        };
-        const moHTML = new MutationObserver(callbackHTML);
-        moHTML.observe(document.querySelector('html'), {
-          attributeFilter: ['style'],
-        });
+          const getInheritedBackgroundColor = (el) => {
+            // get default style for current browser
+            const defaultStyle = getDefaultBackground(); // typically "rgba(0, 0, 0, 0)"
+            // get computed color for el
+            const { backgroundColor } = globalThis.getComputedStyle(el);
+            // if we got a real value, return it
+            if (backgroundColor !== defaultStyle) return backgroundColor;
+            // if we've reached the top parent el without getting an explicit color, return default
+            if (!el.parentElement) return defaultStyle;
+            // otherwise, recurse and try again on parent element
+            return getInheritedBackgroundColor(el.parentElement);
+          };
+          const cloneBackground = () => {
+            clone.style.backgroundColor = getInheritedBackgroundColor(footnotes);
+          };
+
+          // 1st pass
+          cloneBackground();
+
+          // Watch for dark/light mode modification
+          globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => cloneBackground());
+          const callbackHTML = () => {
+            // Wait some times to let browser recalc the new CSS
+            setTimeout(cloneBackground, 1000);
+          };
+          const moHTML = new MutationObserver(callbackHTML);
+          moHTML.observe(document.querySelector('html'), {
+            attributeFilter: ['style'],
+          });
+        }
       }
 
       globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
@@ -98,9 +107,11 @@ dotclear.ready(() => {
         if (clone.querySelectorAll('.flightnotes_note_show').length > 0) clone.classList.add('flightnotes_show');
         else clone.classList.remove('flightnotes_show');
       };
+      const area = data?.area ?? 60;
+      const margin = 100 - area;
       const ioLink = new IntersectionObserver(callbackLink, {
         threshold: [1],
-        rootMargin: '0px 0px -40% 0px', // Area for triggering: top 60% of available viewport
+        rootMargin: `0px 0px -${margin}% 0px`, // Area for triggering: top 60% of available viewport
         trackVisibility: true,
         delay: 100, // Set a minimum delay between notifications
       });

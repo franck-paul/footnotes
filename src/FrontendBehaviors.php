@@ -39,9 +39,23 @@ class FrontendBehaviors
             }
         }
 
+        // Prepare footnotes background color
+        $color = '';
+        if ($settings->colors) {
+            $light = $settings->color_light;
+            $dark  = $settings->color_dark;
+            $color = sprintf(
+                'light-dark(%s, %s)',
+                (string) $light,
+                (string) $dark
+            );
+        }
+
         echo
         Html::jsJson('flightnotes', [
             'background' => $settings->background ?? true,
+            'color'      => $color,
+            'area'       => $settings->area,
         ]) .
         My::cssLoad('footnotes.css') .
         My::jsLoad('footnotes.js');

@@ -5,6 +5,10 @@
   padding-block-end: 1em;
   display: none;
 
+  &.flightnotes_color {
+    background-color: var(--flightnotes-background);
+  }
+
   &.flightnotes_show {
     display: block;
   }

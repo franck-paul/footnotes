@@ -38,6 +38,7 @@ class Backend
         }
 
         App::behavior()->addBehaviors([
+            'adminBlogPreferencesHeaders'   => BackendBehaviors::adminBlogPreferencesHeaders(...),
             'adminBlogPreferencesFormV2'    => BackendBehaviors::adminBlogPreferencesForm(...),
             'adminBeforeBlogSettingsUpdate' => BackendBehaviors::adminBeforeBlogSettingsUpdate(...),
         ]);
