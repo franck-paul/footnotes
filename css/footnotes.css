@@ -6,7 +6,16 @@
   display: none;
 
   &.flightnotes_color {
+    color: var(--flightnotes-color, currentColor);
     background-color: var(--flightnotes-background);
+    a {
+      color: var(--flightnotes-color, currentColor);
+      &:hover,
+      &:focus {
+        color: var(--flightnotes-background);
+        background-color: var(--flightnotes-color, currentColor);
+      }
+    }
   }
 
   &.flightnotes_show {

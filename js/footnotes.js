@@ -32,6 +32,9 @@ dotclear.ready(() => {
       if (data?.background) {
         // Get user-defined background color if defined
         if (data.color !== undefined && data.color !== '') {
+          if (data.text !== undefined && data.text !== '') {
+            document.documentElement.style.setProperty('--flightnotes-color', data.text);
+          }
           document.documentElement.style.setProperty('--flightnotes-background', data.color);
           clone.classList.add('flightnotes_color');
         } else {
