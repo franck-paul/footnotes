@@ -62,28 +62,26 @@ class FrontendBehaviors
                 return $brightness >= 128;
             };
 
-            $light = $settings->color_light;
-            $dark  = $settings->color_dark;
-            $color = sprintf(
-                'light-dark(%s, %s)',
-                (string) $light,
-                (string) $dark
-            );
+            $light = is_string($light = $settings->color_light) ? $light : '#000';
+            $dark  = is_string($dark = $settings->color_dark) ? $dark : '#fff';
+            $color = sprintf('light-dark(%s, %s)', $light, $dark);
 
             // We will use white or black color, depending on brightness of background
             $text = sprintf(
                 'light-dark(%s, %s)',
-                $isBrightColor((string) $light) ? '#000' : '#fff',
-                $isBrightColor((string) $dark) ? '#000' : '#fff',
+                $isBrightColor($light) ? '#000' : '#fff',
+                $isBrightColor($dark) ? '#000' : '#fff',
             );
         }
 
+        $area = is_numeric($area = $settings->area) ? (int) $area : 60;
+
         echo
         Html::jsJson('flightnotes', [
-            'background' => $settings->background ?? true,
+            'background' => (bool) $settings->background,
             'color'      => $color,
             'text'       => $text,
-            'area'       => $settings->area,
+            'area'       => $area,
         ]) .
         My::cssLoad('footnotes.css') .
         My::jsLoad('footnotes.js');

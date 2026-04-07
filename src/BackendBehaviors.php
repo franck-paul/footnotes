@@ -41,8 +41,9 @@ class BackendBehaviors
     {
         $settings = My::settings();
 
-        $color_light = $settings->color_light ?? '#ffffff';
-        $color_dark  = $settings->color_dark  ?? '#000000';
+        $color_light = is_string($color_light = $settings->color_light) ? $color_light : '#ffffff';
+        $color_dark  = is_string($color_dark = $settings->color_dark) ? $color_dark : '#000000';
+        $area        = is_numeric($area = $settings->area) ? (int) $area : 60;
 
         echo
         (new Fieldset('footnotes'))
@@ -108,7 +109,7 @@ class BackendBehaviors
                         ),
                 ]),
             (new Para())->items([
-                (new Number('footnotes_area', 10, 90, $settings->area))
+                (new Number('footnotes_area', 10, 90, $area))
                     ->default(60)
                     ->label((new Label(__('Size of triggering area:'), Label::INSIDE_TEXT_BEFORE))->suffix(__('%'))),
             ]),
@@ -125,13 +126,17 @@ class BackendBehaviors
     {
         $settings = My::settings();
 
+        $color_light = isset($_POST['footnotes_color_light']) && is_string($color_light = $_POST['footnotes_color_light']) ? $color_light : null;
+        $color_dark  = isset($_POST['footnotes_color_dark'])  && is_string($color_dark = $_POST['footnotes_color_dark']) ? $color_dark : null;
+        $area        = isset($_POST['footnotes_area'])        && is_numeric($area = $_POST['footnotes_area']) ? (int) $area : 60;
+
         $settings->put('enabled', !empty($_POST['footnotes_enabled']), App::blogWorkspace()::NS_BOOL);
         $settings->put('single', !empty($_POST['footnotes_single']), App::blogWorkspace()::NS_BOOL);
         $settings->put('background', !empty($_POST['footnotes_background']), App::blogWorkspace()::NS_BOOL);
         $settings->put('colors', !empty($_POST['footnotes_colors']), App::blogWorkspace()::NS_BOOL);
-        $settings->put('color_light', App::backend()->themeConfig()->adjustColor($_POST['footnotes_color_light']), 'string');
-        $settings->put('color_dark', App::backend()->themeConfig()->adjustColor($_POST['footnotes_color_dark']), 'string');
-        $settings->put('area', (int) $_POST['footnotes_area'], App::blogWorkspace()::NS_INT);
+        $settings->put('color_light', App::backend()->themeConfig()->adjustColor($color_light), App::blogWorkspace()::NS_STRING);
+        $settings->put('color_dark', App::backend()->themeConfig()->adjustColor($color_dark), App::blogWorkspace()::NS_STRING);
+        $settings->put('area', $area, App::blogWorkspace()::NS_INT);
 
         return '';
     }
