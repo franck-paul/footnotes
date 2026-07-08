@@ -41,9 +41,9 @@ class BackendBehaviors
     {
         $settings = My::settings();
 
-        $color_light = is_string($color_light = $settings->color_light) ? $color_light : '#ffffff';
-        $color_dark  = is_string($color_dark = $settings->color_dark) ? $color_dark : '#000000';
-        $area        = is_numeric($area = $settings->area) ? (int) $area : 60;
+        $color_light = $settings->getStr('color_light', false) ?: '#ffffff';
+        $color_dark  = $settings->getStr('color_dark', false) ?: '#000000';
+        $area        = $settings->getInt('area', false) ?: 60;
 
         echo
         (new Fieldset('footnotes'))
@@ -51,20 +51,20 @@ class BackendBehaviors
         ->fields([
             (new Para())
                 ->items([
-                    (new Checkbox('footnotes_enabled', (bool) $settings->enabled))
+                    (new Checkbox('footnotes_enabled', $settings->getBool('enabled', false)))
                         ->value(1)
                         ->label((new Label(__('Enable Footnotes'), Label::INSIDE_TEXT_AFTER))),
                 ]),
             (new Text('h5', __('Options'))),
             (new Para())
                 ->items([
-                    (new Checkbox('footnotes_single', (bool) $settings->single))
+                    (new Checkbox('footnotes_single', $settings->getBool('single', false)))
                         ->value(1)
                         ->label((new Label(__('Activate only in single entry context'), Label::INSIDE_TEXT_AFTER))),
                 ]),
             (new Para())
                 ->items([
-                    (new Checkbox('footnotes_background', (bool) $settings->background))
+                    (new Checkbox('footnotes_background', $settings->getBool('background', false)))
                         ->value(1)
                         ->label((new Label(__('Set footnotes background'), Label::INSIDE_TEXT_AFTER))),
                 ]),
@@ -73,7 +73,7 @@ class BackendBehaviors
                 ->text(__('The background color of the actual footnotes, or the user-defined colors if enabled (see below) will be used.')),
             (new Para())
                 ->items([
-                    (new Checkbox('footnotes_colors', (bool) $settings->colors))
+                    (new Checkbox('footnotes_colors', $settings->getBool('colors', false)))
                         ->value(1)
                         ->label((new Label(__('Use an user-defined background color'), Label::INSIDE_TEXT_AFTER))),
                     (new Table())

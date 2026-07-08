@@ -23,11 +23,11 @@ class FrontendBehaviors
     public static function publicHeadContent(): string
     {
         $settings = My::settings();
-        if (!$settings->enabled) {
+        if (!$settings->getBool('enabled')) {
             return '';
         }
 
-        if ($settings->single) {
+        if ($settings->getBool('single')) {
             // Single mode only, check if post/page context
             $urlTypes = ['post'];
             if (App::plugins()->moduleExists('pages')) {
@@ -42,7 +42,7 @@ class FrontendBehaviors
         // Prepare footnotes background color
         $color = '';
         $text  = '';
-        if ($settings->colors) {
+        if ($settings->getBool('colors')) {
             $isBrightColor = function (
                 string $color,  // Must be in hexadecimal form (ex: #ab65c3), with or without # prefix ; may be shorten (ex: #fff)
             ): bool {
@@ -62,8 +62,8 @@ class FrontendBehaviors
                 return $brightness >= 128;
             };
 
-            $light = is_string($light = $settings->color_light) ? $light : '#000';
-            $dark  = is_string($dark = $settings->color_dark) ? $dark : '#fff';
+            $light = $settings->getStr('color_light', false) ?: '#000';
+            $dark  = $settings->getStr('color_dark', false) ?: '#fff';
             $color = sprintf('light-dark(%s, %s)', $light, $dark);
 
             // We will use white or black color, depending on brightness of background
@@ -74,11 +74,11 @@ class FrontendBehaviors
             );
         }
 
-        $area = is_numeric($area = $settings->area) ? (int) $area : 60;
+        $area = $settings->getInt('area', false) ?: 60;
 
         echo
         Html::jsJson('flightnotes', [
-            'background' => (bool) $settings->background,
+            'background' => $settings->getBool('background', false),
             'color'      => $color,
             'text'       => $text,
             'area'       => $area,
