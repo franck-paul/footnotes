@@ -1,6 +1,6 @@
 .flightnotes {
   position: sticky;
-  bottom: 0;
+  inset-block-end: 0;
   border-block-start: 1px solid;
   padding-block-end: 1em;
   display: none;
@@ -27,7 +27,7 @@
 
   .flightnotes_note_show {
     display: block;
-    height: auto;
+    block-size: auto;
   }
   li.flightnotes_note_show {
     display: list-item;
@@ -35,7 +35,7 @@
   .flightnotes_note_hide {
     /* Don't use display: none as it will change the numbering of visible items in ordered list */
     visibility: hidden;
-    height: 0;
+    block-size: 0;
     content-visibility: auto;
   }
 }

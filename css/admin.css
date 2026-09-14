@@ -1,6 +1,6 @@
 #footnotes {
   table.fitcontent {
-    width: fit-content;
+    inline-size: fit-content;
   }
 
   .secondlevel {
