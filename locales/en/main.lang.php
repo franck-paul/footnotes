@@ -24,4 +24,4 @@ L10n::$locales['Backgound color for footnotes:'] = '';
 L10n::$locales['Backgound color for footnotes (dark mode):'] = '';
 L10n::$locales['%'] = '';
 L10n::$locales['Size of triggering area:'] = '';
-L10n::$locales['This refers to the size of the upper part of the display viewport where the content of a footnote link will be displayed. Recommended values range from 50% to 60% (default). Minimum value allowed is 10%, maximum allowed value is 90%.'] = '';
+L10n::$locales['This refers to the size of the upper part of the display viewport where the content of a footnote link will be displayed. Recommended values range from 50% to 70% (60% by default). Minimum value allowed is 10%, maximum allowed value is 90%.'] = '';

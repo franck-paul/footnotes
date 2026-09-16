@@ -80,14 +80,6 @@ dotclear.ready(() => {
         }
       }
 
-      globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
-        if (matches) {
-          console.log('change to dark mode!');
-        } else {
-          console.log('change to light mode!');
-        }
-      });
-
       // Add clone after standard footnotes div
       clone.classList.add('flightnotes');
       footnotes.classList.add('cloned');
@@ -110,11 +102,11 @@ dotclear.ready(() => {
         if (clone.querySelectorAll('.flightnotes_note_show').length > 0) clone.classList.add('flightnotes_show');
         else clone.classList.remove('flightnotes_show');
       };
-      const area = data?.area ?? 60;
+      const area = data?.area ?? 60; // 60% by default
       const margin = 100 - area;
       const ioLink = new IntersectionObserver(callbackLink, {
         threshold: [1],
-        rootMargin: `0px 0px -${margin}% 0px`, // Area for triggering: top 60% of available viewport
+        rootMargin: `0px 0px -${margin}% 0px`, // Area for triggering: top X % of available viewport
         trackVisibility: true,
         delay: 100, // Set a minimum delay between notifications
       });

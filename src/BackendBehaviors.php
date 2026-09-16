@@ -115,7 +115,7 @@ class BackendBehaviors
             ]),
             (new Note())
                 ->class('form-note')
-                ->text(__('This refers to the size of the upper part of the display viewport where the content of a footnote link will be displayed. Recommended values range from 50% to 60% (default). Minimum value allowed is 10%, maximum allowed value is 90%.')),
+                ->text(__('This refers to the size of the upper part of the display viewport where the content of a footnote link will be displayed. Recommended values range from 50% to 70% (60% by default). Minimum value allowed is 10%, maximum allowed value is 90%.')),
         ])
         ->render();
 
