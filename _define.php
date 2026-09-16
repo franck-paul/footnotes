@@ -18,9 +18,9 @@ if (isset($this) && is_object($this) && method_exists($this, 'registerModule') &
         'footnotes',
         'Footnotes',
         'Franck Paul',
-        '4.0',
+        '4.1',
         [
-            'date'        => '2003-08-13T13:42:00+04.0',
+            'date'        => '2003-08-13T13:42:00+04.1',
             'requires'    => [['core', '2.39']],
             'permissions' => 'My',
             'type'        => 'plugin',
